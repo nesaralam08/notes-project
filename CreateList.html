@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create List</title>
+    <link rel="stylesheet" href="list.css">
+</head>
+<body>
+    <h1>Add Notes</h1>
+    <div class="container">
+        <div class="input">
+            <input type="text" placeholder="Add notes...." class="inp">
+            <button class="btn">Add</button>
+            <button class="rem">Remove</button>
+        </div>
+        <p class="output"></p>
+        <div class="box">
+            <ol class="list">
+            </ol>
+        </div>
+    </div>
+    <script>
+        const btn = document.querySelector('.btn');
+        const list = document.querySelector('.list');
+        const rem = document.querySelector('.rem');
+        const error = document.querySelector('.output');
+        // Add Button
+        btn.addEventListener('click',()=>{
+            var inp = document.querySelector('.inp');
+            if(inp.value=="")
+            {
+                error.innerHTML = "Please Enter Something"
+                return;
+            }
+            var li = document.createElement('li');
+            li.innerText = inp.value;
+            list.appendChild(li)
+            inp.value = "";
+            error.innerHTML ="";
+        })
+        // Remove button
+        rem.addEventListener('click',()=>{
+            var RemoveItem = document.querySelector('li:last-child');
+            RemoveItem.remove();
+        })
+        // Enter button press
+        document.addEventListener('keypress',(e)=>{
+            if(e.keyCode===13)
+            {
+                var inp = document.querySelector('.inp');
+                if(inp.value=="")
+                {
+                    error.innerHTML = "Please Enter Something"
+                    return;
+                }
+                var li = document.createElement('li');
+                li.innerText = inp.value;
+                list.appendChild(li)
+                inp.value = "";
+                error.innerHTML ="";
+            }
+        })
+
+        const RandColor = ()=>{
+            let hex = '123456789ABCDEF';
+            let color = '#';
+            for(let i =0;i<6;i++)
+            {
+                color+=hex[Math.floor(Math.random()*16)];
+            }
+            return color;
+        }
+        const ChangeColor = ()=>{
+            let x = document.body.style.backgroundColor = RandColor();
+            console.log(x);
+        }
+        setInterval(ChangeColor,3000);
+    </script>
+</body>
+</html>
